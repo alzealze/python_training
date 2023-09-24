@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from group import Contacts
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 import unittest
@@ -14,7 +15,7 @@ class TestAddContacts(unittest.TestCase):
         self.open_home_page(wd)
         self.login(wd, username="admin", password="secret")
         self.open_contact_page(wd)
-        self.create_contacts(wd, firstname="Aleksandr", lastname="Zemskov", mobile="89201234567", nickname="alze")
+        self.create_contacts(wd, Contacts(firstname="Aleksandr", lastname="Zemskov", mobile="89201234567", nickname="alze"))
         self.returt_home_page(wd)
         self.logout(wd)
 
@@ -23,7 +24,7 @@ class TestAddContacts(unittest.TestCase):
         self.open_home_page(wd)
         self.login(wd, username="admin", password="secret")
         self.open_contact_page(wd)
-        self.create_contacts(wd, firstname="Aleksandr1", lastname="Zemskov1", mobile="89876543210", nickname="alze2")
+        self.create_contacts(wd, Contacts(firstname="Aleksandr1", lastname="Zemskov1", mobile="89876543210", nickname="alze2"))
         self.returt_home_page(wd)
         self.logout(wd)
 
@@ -33,20 +34,20 @@ class TestAddContacts(unittest.TestCase):
     def returt_home_page(self, wd):
         wd.find_element(By.LINK_TEXT, "home page").click()
 
-    def create_contacts(self, wd, firstname, lastname, mobile, nickname):
+    def create_contacts(self, wd, contacts):
         # заполнение формы контакты
         wd.find_element(By.NAME, "firstname").click()
         wd.find_element(By.NAME, "firstname").clear()
-        wd.find_element(By.NAME, "firstname").send_keys(firstname)
+        wd.find_element(By.NAME, "firstname").send_keys(contacts.firstname)
         wd.find_element(By.NAME, "lastname").click()
         wd.find_element(By.NAME, "lastname").clear()
-        wd.find_element(By.NAME, "lastname").send_keys(lastname)
+        wd.find_element(By.NAME, "lastname").send_keys(contacts.lastname)
         wd.find_element(By.NAME, "mobile").click()
         wd.find_element(By.NAME, "mobile").clear()
-        wd.find_element(By.NAME, "mobile").send_keys(mobile)
+        wd.find_element(By.NAME, "mobile").send_keys(contacts.mobile)
         wd.find_element(By.NAME, "nickname").click()
         wd.find_element(By.NAME, "nickname").clear()
-        wd.find_element(By.NAME, "nickname").send_keys(nickname)
+        wd.find_element(By.NAME, "nickname").send_keys(contacts.nickname)
         # Подтверждение заполнения формы контакты
         wd.find_element(By.XPATH, "//div[@id='content']/form/input[21]").click()
 
