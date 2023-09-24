@@ -11,7 +11,9 @@ class TestAddContacts(unittest.TestCase):
 
     def test_add_contacts(self):
         wd = self.wd
+        # Открываем домашнюю страницу
         wd.get("http://localhost/addressbook")
+        # login
         wd.find_element(By.NAME, "user").click()
         wd.find_element(By.NAME, "user").click()
         wd.find_element(By.NAME, "user").clear()
@@ -21,7 +23,9 @@ class TestAddContacts(unittest.TestCase):
         wd.find_element(By.NAME, "pass").clear()
         wd.find_element(By.NAME, "pass").send_keys("secret")
         wd.find_element(By.XPATH, "//input[@value='Login']").click()
+        # Открываем создание контактов add new
         wd.find_element(By.LINK_TEXT, "add new").click()
+        # заполнение формы контакты
         wd.find_element(By.NAME, "firstname").click()
         wd.find_element(By.NAME, "firstname").clear()
         wd.find_element(By.NAME, "firstname").send_keys("Aleksandr")
@@ -34,8 +38,11 @@ class TestAddContacts(unittest.TestCase):
         wd.find_element(By.NAME, "nickname").click()
         wd.find_element(By.NAME, "nickname").clear()
         wd.find_element(By.NAME, "nickname").send_keys("alze")
+        # Подтверждение заполнения формы контакты
         wd.find_element(By.XPATH, "//div[@id='content']/form/input[21]").click()
+        # Возврат на главную страницу
         wd.find_element(By.LINK_TEXT, "home page").click()
+        # Logout
         wd.find_element(By.LINK_TEXT, "Logout").click()
 
     def tearDown(self):
