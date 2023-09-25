@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from group import Contacts
+from group import Contact
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 import unittest
@@ -15,7 +15,7 @@ class TestAddContacts(unittest.TestCase):
         self.open_home_page(wd)
         self.login(wd, username="admin", password="secret")
         self.open_contact_page(wd)
-        self.create_contacts(wd, Contacts(firstname="Aleksandr", lastname="Zemskov", mobile="89201234567", nickname="alze"))
+        self.create_contact(wd, Contact(firstname="Aleksandr", lastname="Zemskov", mobile="89201234567", nickname="alze"))
         self.returt_home_page(wd)
         self.logout(wd)
 
@@ -24,7 +24,7 @@ class TestAddContacts(unittest.TestCase):
         self.open_home_page(wd)
         self.login(wd, username="admin", password="secret")
         self.open_contact_page(wd)
-        self.create_contacts(wd, Contacts(firstname="Aleksandr1", lastname="Zemskov1", mobile="89876543210", nickname="alze2"))
+        self.create_contact(wd, Contact(firstname="Aleksandr1", lastname="Zemskov1", mobile="89876543210", nickname="alze2"))
         self.returt_home_page(wd)
         self.logout(wd)
 
@@ -34,7 +34,7 @@ class TestAddContacts(unittest.TestCase):
     def returt_home_page(self, wd):
         wd.find_element(By.LINK_TEXT, "home page").click()
 
-    def create_contacts(self, wd, contacts):
+    def create_contact(self, wd, contacts):
         # заполнение формы контакты
         wd.find_element(By.NAME, "firstname").click()
         wd.find_element(By.NAME, "firstname").clear()
