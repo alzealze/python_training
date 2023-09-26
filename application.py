@@ -56,3 +56,62 @@ class Application:
 
     def destroy(self):
         self.wd.quit()
+
+
+class ApplicationCont:
+    def __init__(self):
+        self.wd = webdriver.Firefox()
+        self.wd.implicitly_wait(30)
+
+    def logout(self):
+        wd = self.wd
+        wd.find_element(By.LINK_TEXT, "Logout").click()
+
+    def return_home_page(self):
+        wd = self.wd
+        wd.find_element(By.LINK_TEXT, "home page").click()
+
+    def create_contact(self, contacts):
+        wd = self.wd
+        self.open_contact_page()
+        # заполнение формы контакты
+        wd.find_element(By.NAME, "firstname").click()
+        wd.find_element(By.NAME, "firstname").clear()
+        wd.find_element(By.NAME, "firstname").send_keys(contacts.firstname)
+        wd.find_element(By.NAME, "lastname").click()
+        wd.find_element(By.NAME, "lastname").clear()
+        wd.find_element(By.NAME, "lastname").send_keys(contacts.lastname)
+        wd.find_element(By.NAME, "mobile").click()
+        wd.find_element(By.NAME, "mobile").clear()
+        wd.find_element(By.NAME, "mobile").send_keys(contacts.mobile)
+        wd.find_element(By.NAME, "nickname").click()
+        wd.find_element(By.NAME, "nickname").clear()
+        wd.find_element(By.NAME, "nickname").send_keys(contacts.nickname)
+        # Подтверждение заполнения формы контакты
+        wd.find_element(By.XPATH, "//div[@id='content']/form/input[21]").click()
+        self.return_home_page()
+
+    def open_contact_page(self):
+        wd = self.wd
+        wd.find_element(By.LINK_TEXT, "add new").click()
+
+    def login(self, username, password):
+        wd = self.wd
+        self.open_home_page()
+        wd.find_element(By.NAME, "user").click()
+        wd.find_element(By.NAME, "user").click()
+        wd.find_element(By.NAME, "user").clear()
+        wd.find_element(By.NAME, "user").send_keys(username)
+        wd.find_element(By.ID, "LoginForm").click()
+        wd.find_element(By.NAME, "pass").click()
+        wd.find_element(By.NAME, "pass").clear()
+        wd.find_element(By.NAME, "pass").send_keys(password)
+        wd.find_element(By.XPATH, "//input[@value='Login']").click()
+
+    def open_home_page(self):
+        wd = self.wd
+        wd.get("http://localhost/addressbook")
+
+    def destroycont(self):
+        self.wd.quit()
+
