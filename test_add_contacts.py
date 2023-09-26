@@ -12,20 +12,8 @@ class TestAddContacts(unittest.TestCase):
 
     def test_add_contacts(self):
         wd = self.wd
-        self.open_home_page(wd)
         self.login(wd, username="admin", password="secret")
-        self.open_contact_page(wd)
         self.create_contact(wd, Contact(firstname="Aleksandr", lastname="Zemskov", mobile="89201234567", nickname="alze"))
-        self.returt_home_page(wd)
-        self.logout(wd)
-
-    def test_add_contacts_other(self):
-        wd = self.wd
-        self.open_home_page(wd)
-        self.login(wd, username="admin", password="secret")
-        self.open_contact_page(wd)
-        self.create_contact(wd, Contact(firstname="Aleksandr1", lastname="Zemskov1", mobile="89876543210", nickname="alze2"))
-        self.returt_home_page(wd)
         self.logout(wd)
 
     def logout(self, wd):
@@ -35,6 +23,7 @@ class TestAddContacts(unittest.TestCase):
         wd.find_element(By.LINK_TEXT, "home page").click()
 
     def create_contact(self, wd, contacts):
+        self.open_contact_page(wd)
         # заполнение формы контакты
         wd.find_element(By.NAME, "firstname").click()
         wd.find_element(By.NAME, "firstname").clear()
@@ -50,11 +39,13 @@ class TestAddContacts(unittest.TestCase):
         wd.find_element(By.NAME, "nickname").send_keys(contacts.nickname)
         # Подтверждение заполнения формы контакты
         wd.find_element(By.XPATH, "//div[@id='content']/form/input[21]").click()
+        self.returt_home_page(wd)
 
     def open_contact_page(self, wd):
         wd.find_element(By.LINK_TEXT, "add new").click()
 
     def login(self, wd, username, password):
+        self.open_home_page(wd)
         wd.find_element(By.NAME, "user").click()
         wd.find_element(By.NAME, "user").click()
         wd.find_element(By.NAME, "user").clear()
