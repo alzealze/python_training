@@ -1,70 +1,25 @@
 # -*- coding: utf-8 -*-
+from application import Application
 from group import Group
-from selenium import webdriver
-from selenium.webdriver.common.by import By
 import unittest
 
 
 class TestAddGroup(unittest.TestCase):
     def setUp(self):
-        self.wd = webdriver.Firefox()
-        self.wd.implicitly_wait(30)
+        self.app = Application()
 
     def test_add_group(self):
-        wd = self.wd
-        self.login(wd, "admin", "secret")
-        self.create_group(wd, Group("dfgdfg", "dfgdfg", "dfgdfgdfg"))
-        self.logout(wd)
+        self.app.login("admin", "secret")
+        self.app.create_group(Group("dfgdfg", "dfgdfg", "dfgdfgdfg"))
+        self.app.logout()
 
     def test_add_empty_group(self):
-        wd = self.wd
-        self.login(wd, "admin", "secret")
-        self.create_group(wd, Group("", "", ""))
-        self.logout(wd)
-
-    def logout(self, wd):
-        wd.find_element(By.LINK_TEXT, "Logout").click()
-
-    def return_to_groups_page(self, wd):
-        wd.find_element(By.LINK_TEXT, "group page").click()
-
-    def create_group(self, wd, group):
-        self.open_groups_page(wd)
-        # Создаем новую группу
-        wd.find_element(By.NAME, "new").click()
-        # Заполняем формы на странице group
-        wd.find_element(By.NAME, "group_name").click()
-        wd.find_element(By.NAME, "group_name").clear()
-        wd.find_element(By.NAME, "group_name").send_keys(group.name)
-        wd.find_element(By.NAME, "group_header").click()
-        wd.find_element(By.NAME, "group_header").clear()
-        wd.find_element(By.NAME, "group_header").send_keys(group.header)
-        wd.find_element(By.NAME, "group_footer").click()
-        wd.find_element(By.NAME, "group_footer").clear()
-        wd.find_element(By.NAME, "group_footer").send_keys(group.footer)
-        # Подтверждение создания группы на странице group
-        wd.find_element(By.NAME, "submit").click()
-        self.return_to_groups_page(wd)
-
-    def open_groups_page(self, wd):
-        wd.find_element(By.LINK_TEXT, "groups").click()
-
-    def login(self, wd, username, password):
-        self.open_home_page(wd)
-        wd.find_element(By.NAME, "user").click()
-        wd.find_element(By.NAME, "user").clear()
-        wd.find_element(By.NAME, "user").send_keys(username)
-        wd.find_element(By.ID, "LoginForm").click()
-        wd.find_element(By.NAME, "pass").click()
-        wd.find_element(By.NAME, "pass").clear()
-        wd.find_element(By.NAME, "pass").send_keys(password)
-        wd.find_element(By.XPATH, "//input[@value='Login']").click()
-
-    def open_home_page(self, wd):
-        wd.get("http://localhost/addressbook/")
+        self.app.login("admin", "secret")
+        self.app.create_group(Group("", "", ""))
+        self.app.logout()
 
     def tearDown(self):
-        self.wd.quit()
+        self.app.destroy()
 
 
 if __name__ == "__main__":
