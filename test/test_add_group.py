@@ -13,18 +13,18 @@ def app(request):
 
 
 def test_add_group(app):
-    app.login("admin", "secret")
+    app.session.login("admin", "secret")
     app.create_group(Group("dfgdfg", "dfgdfg", "dfgdfgdfg"))
-    app.logout()
+    app.session.logout()
 
 
 def test_add_empty_group(app):
-    app.login("admin", "secret")
+    app.session.login("admin", "secret")
     app.create_group(Group("", "", ""))
-    app.logout()
+    app.session.logout()
 
 
 def test_add_contact(app):
-    app.login(username="admin", password="secret")
+    app.session.login(username="admin", password="secret")
     app.create_contact(Contact(firstname="Aleksandr", lastname="Zemskov", mobile="89201234567", nickname="alze"))
-    app.logout()
+    app.session.logout()
