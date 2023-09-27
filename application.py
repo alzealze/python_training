@@ -54,7 +54,6 @@ class Application:
         wd = self.wd
         wd.find_element(By.LINK_TEXT, "Logout").click()
 
-
     def open_contact_page(self):
         wd = self.wd
         wd.find_element(By.LINK_TEXT, "add new").click()
@@ -82,7 +81,6 @@ class Application:
     def return_home_page(self):
         wd = self.wd
         wd.find_element(By.LINK_TEXT, "home page").click()
-
 
     def destroy(self):
         self.wd.quit()
