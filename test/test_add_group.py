@@ -1,20 +1,10 @@
 # -*- coding: utf-8 -*-
-from fixture.application import Application
 from model.group import Group, Contact
-import pytest
-
-
-@pytest.fixture
-def app(request):
-    """Создаем, разрушаем, возвращаем фикстуру"""
-    fixture = Application()
-    request.addfinalizer(fixture.destroy)
-    return fixture
 
 
 def test_add_group(app):
     app.session.login("admin", "secret")
-    app.group.create(Group("dfgdfg", "dfgdfg", "dfgdfgdfg"))
+    app.group.create(Group("Б40", "python", "python_test"))
     app.session.logout()
 
 

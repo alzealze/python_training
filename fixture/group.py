@@ -32,6 +32,15 @@ class GroupHelper:
         wd = self.app.wd
         wd.find_element(By.LINK_TEXT, "group page").click()
 
+    def delete_first_group(self):
+        wd = self.app.wd
+        self.open_groups_page()
+        # Выбрать первую группу
+        wd.find_element(By.NAME, "selected[]").click()
+        # Удалить выбранную группу
+        wd.find_element(By.NAME, "delete").click()
+        self.return_to_groups_page()
+
 
 class ContactHelper:
     def __init__(self, app):
