@@ -26,5 +26,5 @@ def test_add_empty_group(app):
 
 def test_add_contact(app):
     app.session.login(username="admin", password="secret")
-    app.create_contact(Contact(firstname="Aleksandr", lastname="Zemskov", mobile="89201234567", nickname="alze"))
+    app.contact.create(Contact(firstname="Aleksandr", lastname="Zemskov", mobile="89201234567", nickname="alze"))
     app.session.logout()
