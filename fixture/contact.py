@@ -31,4 +31,14 @@ class ContactHelper:
 
     def return_home_page(self):
         wd = self.app.wd
-        wd.find_element(By.LINK_TEXT, "home page").click()
+        wd.find_element(By.LINK_TEXT, "home").click()
+
+    def delete_first_contact(self):
+        wd = self.app.wd
+        # Выбрать первый контакт
+        wd.find_element(By.NAME, "selected[]").click()
+        # Удалить выбранный первый контакт
+        wd.find_element(By.XPATH, "//input[@value='Delete']").click()
+        # Подтверждение удаления контакта
+        wd.switch_to.alert.accept()
+        self.return_home_page()
