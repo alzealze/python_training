@@ -50,13 +50,13 @@ class GroupHelper:
         # Редактируем группу
         wd.find_element(By.NAME, "group_name").click()
         wd.find_element(By.NAME, "group_name").clear()
-        wd.find_element(By.NAME, "group_name").send_keys(u"Б40_test")
+        wd.find_element(By.NAME, "group_name").send_keys(u"Б40_edit")
         wd.find_element(By.NAME, "group_header").click()
         wd.find_element(By.NAME, "group_header").clear()
-        wd.find_element(By.NAME, "group_header").send_keys(u"python_test")
+        wd.find_element(By.NAME, "group_header").send_keys(u"python_edit")
         wd.find_element(By.NAME, "group_footer").click()
         wd.find_element(By.NAME, "group_footer").clear()
-        wd.find_element(By.NAME, "group_footer").send_keys(u"python")
+        wd.find_element(By.NAME, "group_footer").send_keys(u"comment_edit")
         # Подтверждение редактирования группы
         wd.find_element(By.NAME, "update").click()
         self.return_to_groups_page()

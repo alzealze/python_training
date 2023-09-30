@@ -46,3 +46,26 @@ class ContactHelper:
         # Подтверждение удаления контакта
         wd.switch_to.alert.accept()
         self.return_main_page()
+
+    def edit_first_contact(self):
+        wd = self.app.wd
+        self.return_main_page()
+        # Выбрать первый контакт и нажимаем Edit
+#        wd.find_element(By.NAME, "selected[]").click()
+        wd.find_element(By.XPATH, "//img[@alt='Edit']").click()
+        # Редактируем контакт
+        wd.find_element(By.NAME, "firstname").click()
+        wd.find_element(By.NAME, "firstname").clear()
+        wd.find_element(By.NAME, "firstname").send_keys(u"Aleksandr_edit")
+        wd.find_element(By.NAME, "lastname").click()
+        wd.find_element(By.NAME, "lastname").clear()
+        wd.find_element(By.NAME, "lastname").send_keys(u"Zemskov_edit")
+        wd.find_element(By.NAME, "nickname").click()
+        wd.find_element(By.NAME, "nickname").clear()
+        wd.find_element(By.NAME, "nickname").send_keys(u"alze_edit")
+        wd.find_element(By.NAME, "mobile").click()
+        wd.find_element(By.NAME, "mobile").clear()
+        wd.find_element(By.NAME, "mobile").send_keys(u"89201234567_edit")
+        # нажимаем Update
+        wd.find_element(By.XPATH, "//div[@id='content']/form/input[22]").click()
+        self.return_home_page()
