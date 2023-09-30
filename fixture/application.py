@@ -1,5 +1,6 @@
 from selenium import webdriver
-from fixture.group import GroupHelper, ContactHelper
+from fixture.group import GroupHelper
+from fixture.contact import ContactHelper
 from fixture.session import SessionHelper
 
 
