@@ -41,7 +41,7 @@ class GroupHelper:
         wd.find_element(By.NAME, "delete").click()
         self.return_to_groups_page()
 
-    def edit_first_group(self):
+    def edit_first_group(self, group):
         wd = self.app.wd
         self.open_groups_page()
         # Выбраем первую группу и нажимаем Edit group
@@ -50,13 +50,13 @@ class GroupHelper:
         # Редактируем группу
         wd.find_element(By.NAME, "group_name").click()
         wd.find_element(By.NAME, "group_name").clear()
-        wd.find_element(By.NAME, "group_name").send_keys(u"Б40_edit")
+        wd.find_element(By.NAME, "group_name").send_keys(group.name)
         wd.find_element(By.NAME, "group_header").click()
         wd.find_element(By.NAME, "group_header").clear()
-        wd.find_element(By.NAME, "group_header").send_keys(u"python_edit")
+        wd.find_element(By.NAME, "group_header").send_keys(group.header)
         wd.find_element(By.NAME, "group_footer").click()
         wd.find_element(By.NAME, "group_footer").clear()
-        wd.find_element(By.NAME, "group_footer").send_keys(u"comment_edit")
+        wd.find_element(By.NAME, "group_footer").send_keys(group.footer)
         # Подтверждение редактирования группы
         wd.find_element(By.NAME, "update").click()
         self.return_to_groups_page()
