@@ -60,3 +60,9 @@ class ContactHelper:
         # Нажимаем Update
         wd.find_element(By.XPATH, "//div[@id='content']/form/input[22]").click()
         self.return_main_page()
+
+    def count(self):
+        wd = self.app.wd
+        self.open_main_page()
+        return len(wd.find_elements(By.NAME, "selected[]"))
+
