@@ -37,7 +37,8 @@ class ContactHelper:
 
     def open_main_page(self):
         wd = self.app.wd
-        wd.find_element(By.LINK_TEXT, "home").click()
+        if not (wd.current_url.endswith("localhost/addressbook/" or "/index.php") and len(wd.find_elements(By.NAME, "add")) > 0):
+            wd.find_element(By.LINK_TEXT, "home").click()
 
     def delete_first_contact(self):
         wd = self.app.wd
@@ -65,4 +66,3 @@ class ContactHelper:
         wd = self.app.wd
         self.open_main_page()
         return len(wd.find_elements(By.NAME, "selected[]"))
-
