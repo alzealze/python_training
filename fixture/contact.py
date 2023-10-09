@@ -73,7 +73,8 @@ class ContactHelper:
         self.open_main_page()
         contacts = []
         for element in wd.find_elements(By.NAME, "entry"):
-            text = element.text
+            text = element.text.split()
+            print(text)
             id = element.find_element(By.NAME, "selected[]").get_attribute("value")
             contacts.append(Contact(firstname=text, id=id))
         return contacts
