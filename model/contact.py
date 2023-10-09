@@ -11,4 +11,4 @@ class Contact:
         return "%s:%s:%s" % (self.id, self.firstname, self.lastname)
 
     def __eq__(self, other):
-        return self.id == other.id and self.firstname == other.firstname
+        return self.id == other.id and self.firstname == other.firstname and self.lastname == other.lastname
