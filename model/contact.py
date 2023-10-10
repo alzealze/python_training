@@ -1,3 +1,6 @@
+from sys import maxsize
+
+
 class Contact:
     """для создания контакта на http://localhost/addressbook/"""
     def __init__(self, firstname=None, lastname=None, mobile=None, nickname=None, id=None):
@@ -11,4 +14,10 @@ class Contact:
         return "%s:%s:%s" % (self.id, self.firstname, self.lastname)
 
     def __eq__(self, other):
-        return self.id == other.id and self.firstname == other.firstname and self.lastname == other.lastname
+        return (self.id is None or other.id is None or self.id == other.id) and self.firstname == other.firstname and self.lastname == other.lastname
+
+    def id_or_max(cont):
+        if cont.id:
+            return int(cont.id)
+        else:
+            return maxsize
