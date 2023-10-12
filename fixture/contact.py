@@ -43,28 +43,48 @@ class ContactHelper:
             wd.find_element(By.LINK_TEXT, "home").click()
 
     def delete_first_contact(self):
+        self.delete_contact_by_index(0)
+
+    def delete_contact_by_index(self, index):
         wd = self.app.wd
         self.open_main_page()
-        # Выбрать первый контакт
-        wd.find_element(By.NAME, "selected[]").click()
-        # Удалить выбранный первый контакт
+        self.select_contacts_by_index(index)
+        # Удалить выбранный контакт
         wd.find_element(By.XPATH, "//input[@value='Delete']").click()
         # Подтверждение удаления контакта
         wd.switch_to.alert.accept()
         self.open_main_page()
         self.contact_cache = None
 
-    def modify_first_contact(self, new_contact_data):
+    def select_contacts_by_index(self, index):
+        wd = self.app.wd
+        wd.find_elements(By.NAME, "selected[]")[index].click()
+
+    def select_first_contacts(self):
+        wd = self.app.wd
+        wd.find_element(By.NAME, "selected[]").click()
+
+    def modify_first_contact(self):
+        self.edit_contact_by_index(0)
+
+    def modify_contact_by_index(self, index, new_contact_data):
         wd = self.app.wd
         self.open_main_page()
-        # Нажимаем Edit первого контакта
-        wd.find_element(By.XPATH, "//img[@alt='Edit']").click()
+        self.edit_contact_by_index(index)
         # Редактируем контакт
         self.fill_contact_form(new_contact_data)
         # Нажимаем Update
         wd.find_element(By.XPATH, "//div[@id='content']/form/input[22]").click()
         self.return_main_page()
         self.contact_cache = None
+
+    def edit_contact_by_index(self, index):
+        wd = self.app.wd
+        wd.find_elements(By.XPATH, "//img[@alt='Edit']")[index].click()
+
+    def edit_first_contact(self):
+        wd = self.app.wd
+        wd.find_element(By.XPATH, "//img[@alt='Edit']").click()
 
     def count(self):
         wd = self.app.wd
