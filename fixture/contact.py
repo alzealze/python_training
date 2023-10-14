@@ -65,12 +65,12 @@ class ContactHelper:
         wd.find_element(By.NAME, "selected[]").click()
 
     def modify_first_contact(self):
-        self.edit_contact_by_index(0)
+        self.select_edit_contact_by_index(0)
 
     def modify_contact_by_index(self, index, new_contact_data):
         wd = self.app.wd
         self.open_main_page()
-        self.edit_contact_by_index(index)
+        self.select_edit_contact_by_index(index)
         # Редактируем контакт
         self.fill_contact_form(new_contact_data)
         # Нажимаем Update
@@ -78,11 +78,11 @@ class ContactHelper:
         self.return_main_page()
         self.contact_cache = None
 
-    def edit_contact_by_index(self, index):
+    def select_edit_contact_by_index(self, index):
         wd = self.app.wd
         wd.find_elements(By.XPATH, "//img[@alt='Edit']")[index].click()
 
-    def edit_first_contact(self):
+    def select_edit_first_contact(self):
         wd = self.app.wd
         wd.find_element(By.XPATH, "//img[@alt='Edit']").click()
 
