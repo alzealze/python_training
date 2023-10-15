@@ -1,5 +1,3 @@
-from time import sleep
-
 from selenium.webdriver.common.by import By
 from model.contact import Contact
 import re
@@ -42,7 +40,8 @@ class ContactHelper:
 
     def open_main_page(self):
         wd = self.app.wd
-        if not (wd.current_url.endswith("localhost/addressbook/" or "/index.php") and len(wd.find_elements(By.NAME, "add")) > 0):
+        if not (wd.current_url.endswith("localhost/addressbook/" or "/index.php")
+                and len(wd.find_elements(By.NAME, "add")) > 0):
             wd.find_element(By.LINK_TEXT, "home").click()
 
     def delete_first_contact(self):
@@ -108,10 +107,9 @@ class ContactHelper:
                 firstname_text = cells[2].text
                 lastname_text = cells[1].text
                 id = element.find_element(By.NAME, "selected[]").get_attribute("value")
-                all_phones = cells[5].text.splitlines()
+                all_phones = cells[5].text
                 self.contact_cache.append(Contact(firstname=firstname_text, lastname=lastname_text, id=id,
-                                                  homephone=all_phones[0], mobile=all_phones[1],
-                                                  workphone=all_phones[2], secondaryphone=all_phones[3]))
+                                                  all_phones_from_home_page=all_phones))
         return list(self.contact_cache)
 
     def open_contact_view_by_index(self, index):
@@ -120,7 +118,6 @@ class ContactHelper:
         row = wd.find_elements(By.NAME, "entry")[index]
         cell = row.find_elements(By.TAG_NAME, "td")[6]
         cell.find_element(By.TAG_NAME, "a").click()
-
 
     def get_contact_info_from_edit_page(self, index):
         wd = self.app.wd
