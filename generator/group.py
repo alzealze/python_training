@@ -10,10 +10,12 @@ import sys
 try:
     # n- задает количество генерируемых данных, f-файл в который записываются n
     opts, args = getopt.getopt(sys.argv[1:], "n:f:", ["number of groups", "file"])
+
 except getopt.GetoptError as err:
     getopt.usage()
     sys.exit(2)
 # L_6_10
+
 n = 5
 f = "data/groups.json"
 
