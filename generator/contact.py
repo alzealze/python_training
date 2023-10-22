@@ -9,14 +9,14 @@ import sys
 
 try:
     # n- задает количество генерируемых данных, f-файл в который записываются n
-    opts, args = getopt.getopt(sys.argv[1:], "n:f:", ["number of contact", "file"])
+    opts, args = getopt.getopt(sys.argv[1:], "n:f:", ["number of contacts", "file"])
 except getopt.GetoptError as err:
     getopt.usage()
     sys.exit(2)
 
 # L_6_10
 n = 5
-f = "data/contact.json"
+f = "data/contacts.json"
 
 for o, a in opts:
     if o == "-n":
