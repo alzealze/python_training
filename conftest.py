@@ -16,7 +16,6 @@ def app(request):
     browser = request.config.getoption("--browser")
     if target is None:
         config_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), request.config.getoption("--target"))
-        # print("config_fileconfig_fileconfig_fileconfig_file", config_file)
         with open(config_file) as f:
             target = json.load(f)
     if fixture is None or not fixture.is_valid():
