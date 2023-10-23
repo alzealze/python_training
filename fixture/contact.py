@@ -40,7 +40,7 @@ class ContactHelper:
 
     def open_main_page(self):
         wd = self.app.wd
-        if not (wd.current_url.endswith("localhost/addressbook/" or "/index.php")
+        if not (wd.current_url.endswith("addressbook/" or "/index.php")
                 and len(wd.find_elements(By.NAME, "add")) > 0):
             wd.find_element(By.LINK_TEXT, "home").click()
 
