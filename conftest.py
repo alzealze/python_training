@@ -4,7 +4,7 @@ import json
 import jsonpickle
 import os.path
 import importlib
-from fixture.db import DbFixure
+from fixture.db import DbFixture
 
 
 fixture = None
@@ -34,12 +34,12 @@ def app(request):
 
 
 @pytest.fixture(scope="session")
-def db(reuqest):
+def db(request):
     db_config = load_config(request.config.getoption("--target"))["db"]
-    dbfixture = DbFixure(host=db_config["host"], name=db_config["name"],user=db_config["user"],password=db_config["password"])
+    dbfixture = DbFixture(host=db_config["host"], name=db_config["name"], user=db_config["user"], password=db_config["password"])
     def fin():
         dbfixture.destroy()
-    reuqest.addfinalizer(fin)
+    request.addfinalizer(fin)
     return dbfixture
 
 
