@@ -51,6 +51,7 @@ def stop(request):
     request.addfinalizer(fin)
     return fixture
 
+
 @pytest.fixture
 def check_ui(request):
     return request.config.getoption("--check_ui")
