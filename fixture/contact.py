@@ -100,6 +100,23 @@ class ContactHelper:
         self.open_main_page()
         wd.find_elements(By.XPATH, "//img[@alt='Edit']")[index].click()
 
+    def modify_contact_by_id(self, id, contact):
+        wd = self.app.wd
+        self.open_main_page()
+        self.open_contact_to_edit_by_id(id)
+        # Редактируем контакт
+        self.fill_contact_form(contact)
+        # Нажимаем Update
+        wd.find_element(By.XPATH, "//div[@id='content']/form/input[22]").click()
+        self.return_main_page()
+        self.contact_cache = None
+
+    def open_contact_to_edit_by_id(self, id):
+        wd = self.app.wd
+        self.open_main_page()
+        wd.find_element(By.CSS_SELECTOR, "a[href='edit.php?id=%s']" % id).click()
+
+
     def open_contact_to_edit_first(self):
         wd = self.app.wd
         self.open_main_page()

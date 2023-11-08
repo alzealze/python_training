@@ -71,7 +71,6 @@ class GroupHelper:
         self.return_to_groups_page()
         self.group_cache = None
 
-
     def modify_group_by_index(self, index, new_group_data):
         wd = self.app.wd
         self.open_groups_page()
@@ -80,6 +79,19 @@ class GroupHelper:
         wd.find_element(By.NAME, "edit").click()
         # Заполняем форму модификации группы
         self.fill_group_form(new_group_data)
+        # подтверждение модификации группы
+        wd.find_element(By.NAME, "update").click()
+        self.return_to_groups_page()
+        self.group_cache = None
+
+    def modify_group_by_id(self, id, group):
+        wd = self.app.wd
+        self.open_groups_page()
+        self.select_group_by_id(id)
+        # Открываем кнопку модификации группы
+        wd.find_element(By.NAME, "edit").click()
+        # Заполняем форму модификации группы
+        self.fill_group_form(group)
         # подтверждение модификации группы
         wd.find_element(By.NAME, "update").click()
         self.return_to_groups_page()
