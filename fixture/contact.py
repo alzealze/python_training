@@ -140,11 +140,22 @@ class ContactHelper:
                 lastname_text = cells[1].text
                 id = element.find_element(By.NAME, "selected[]").get_attribute("value")
                 all_phones = cells[5].text
+                all_phones = all_phones.split("\n")
+                homephone = all_phones[0]
+                mobile = all_phones[1]
+                workphone = all_phones[2]
+                secondaryphone = all_phones[3]
                 address = cells[3].text
                 all_emails = cells[4].text
+                all_emails = all_emails.split("\n")
+                email = all_emails[0]
+                email2 = all_emails[1]
+                email3 = all_emails[2]
                 self.contact_cache.append(Contact(firstname=firstname_text, lastname=lastname_text, id=id,
                                                   all_phones_from_home_page=all_phones, address=address,
-                                                  all_emails_from_home_page=all_emails))
+                                                  homephone=homephone, mobile=mobile, workphone=workphone,
+                                                  secondaryphone=secondaryphone, all_emails_from_home_page=all_emails,
+                                                  email=email, email2=email2, email3=email3))
         return list(self.contact_cache)
 
     def open_contact_view_by_index(self, index):

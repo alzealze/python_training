@@ -32,7 +32,12 @@ def random_string(prefix, maxlen):
 
 testdata = [Contact(firstname="", lastname="", mobile="", nickname="")] + [
     Contact(firstname=random_string("firstname", 15), lastname=random_string("lastname", 15),
-            mobile=random_string("mobile", 10), nickname=random_string("nickname", 20))
+            address=random_string("address", 15), mobile=random_string("mobile", 10),
+            nickname=random_string("nickname", 20), homephone=random_string("homephone", 10),
+            workphone=random_string("workphone", 10),
+            secondaryphone=random_string("secondaryphone", 10),
+            email=random_string("email", 10),
+            email2=random_string("email2", 10), email3=random_string("email3", 10))
     for i in range(n)
 ]
 
